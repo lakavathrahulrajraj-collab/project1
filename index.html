@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GirlScholar - Empowering Education Through Scholarships</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            500: '#ec4899',
+                            600: '#db2777',
+                            700: '#be185d',
+                            800: '#9d174d',
+                            900: '#831843',
+                        },
+                        indigoBrand: {
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-gradient {
+            background: linear-gradient(135deg, #fce7f3 0%, #e0e7ff 50%, #fae8ff 100%);
+        }
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-500 selection:text-white">
+
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
+                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-brand-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-brand-500/20">
+                        <i class="fa-solid fa-graduation-cap text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-extrabold bg-gradient-to-r from-brand-600 to-indigo-600 bg-clip-text text-transparent">GirlScholar</span>
+                        <span class="block text-xs font-medium text-slate-500 tracking-wider">EMPOWERING HER FUTURE</span>
+                    </div>
+                </div>
+                <nav class="hidden md:flex items-center space-x-8 font-medium text-slate-600">
+                    <button onclick="switchTab('home')" id="nav-home" class="text-brand-600 font-semibold transition hover:text-brand-600">Home</button>
+                    <button onclick="switchTab('recommend')" id="nav-recommend" class="transition hover:text-brand-600">Find Scholarship</button>
+                    <button onclick="switchTab('directory')" id="nav-directory" class="transition hover:text-brand-600">Browse All</button>
+                    <button onclick="switchTab('stories')" id="nav-stories" class="transition hover:text-brand-600">Success Stories</button>
+                    <button onclick="switchTab('faq')" id="nav-faq" class="transition hover:text-brand-600">FAQ</button>
+                </nav>
+                <div class="hidden md:flex items-center space-x-4">
+                    <button onclick="openModal('loginModal')" class="text-slate-700 font-semibold px-4 py-2 rounded-xl hover:bg-slate-100 transition">Log In</button>
+                    <button onclick="switchTab('recommend')" class="bg-gradient-to-r from-brand-600 to-indigo-600 text-white font-semibold px-5 py-2.5 rounded-xl shadow-lg shadow-brand-600/20 hover:opacity-95 transition transform active:scale-95">Get Started</button>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button onclick="toggleMobileMenu()" class="text-slate-700 focus:outline-none p-2 rounded-lg hover:bg-slate-100">
+                        <i class="fa-solid fa-bars text-2xl" id="mobileMenuIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-100 px-4 pt-2 pb-6 space-y-3">
+            <button onclick="switchTab('home'); toggleMobileMenu();" class="block w-full text-left py-2 font-medium text-slate-700 hover:text-brand-600">Home</button>
+            <button onclick="switchTab('recommend'); toggleMobileMenu();" class="block w-full text-left py-2 font-medium text-slate-700 hover:text-brand-600">Find Scholarship</button>
+            <button onclick="switchTab('directory'); toggleMobileMenu();" class="block w-full text-left py-2 font-medium text-slate-700 hover:text-brand-600">Browse All</button>
+            <button onclick="switchTab('stories'); toggleMobileMenu();" class="block w-full text-left py-2 font-medium text-slate-700 hover:text-brand-600">Success Stories</button>
+            <button onclick="switchTab('faq'); toggleMobileMenu();" class="block w-full text-left py-2 font-medium text-slate-700 hover:text-brand-600">FAQ</button>
+            <div class="pt-2 flex flex-col space-y-2">
+                <button onclick="openModal('loginModal')" class="w-full text-center border border-slate-300 py-2.5 rounded-xl font-semibold text-slate-700">Log In</button>
+                <button onclick="switchTab('recommend'); toggleMobileMenu();" class="w-full text-center bg-brand-600 text-white py-2.5 rounded-xl font-semibold">Get Started</button>
+            </div>
+        </div>
+    </header>
+
+    <main id="mainContainer">
+
+        <!-- VIEW: HOME / LANDING PAGE -->
+        <section id="view-home" class="block">
+            <!-- Hero Banner -->
+            <div class="hero-gradient py-16 lg:py-24 relative overflow-hidden">
+                <div class="absolute -right-20 -top-20 w-96 h-96 bg-pink-300/30 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -left-20 -bottom-20 w-96 h-96 bg-indigo-300/30 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                            <div class="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm border border-brand-200 px-4 py-2 rounded-full text-brand-700 text-sm font-semibold shadow-sm">
+                                <i class="fa-solid fa-sparkles text-brand-600"></i>
+                                <span>Over 5,000+ Verified Girl-Centric Scholarships</span>
+                            </div>
+                            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight">
+                                Fueling Dreams, <br>Unlocking <span class="bg-gradient-to-r from-brand-600 to-indigo-600 bg-clip-text text-transparent">Scholarships for Girls</span>
+                            </h1>
+                            <p class="text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0">
+                                Discover financial assistance tailored precisely to your education level, field of study, and career aspirations. Never let financial barriers stop your academic excellence.
+                            </p>
+                            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-3 sm:space-y-0 sm:space-x-4 pt-4">
+                                <button onclick="switchTab('recommend')" class="w-full sm:w-auto bg-gradient-to-r from-brand-600 to-indigo-600 text-white font-bold px-8 py-4 rounded-2xl shadow-xl shadow-brand-600/30 hover:opacity-95 transition transform active:scale-95 text-lg flex items-center justify-center space-x-3">
+                                    <span>Find My Scholarship</span>
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                                <button onclick="switchTab('directory')" class="w-full sm:w-auto bg-white text-slate-700 font-bold px-8 py-4 rounded-2xl border border-slate-200 shadow-sm hover:bg-slate-50 transition text-lg flex items-center justify-center space-x-2">
+                                    <i class="fa-solid fa-magnifying-glass text-slate-400"></i>
+                                    <span>Browse Directory</span>
+                                </button>
+                            </div>
+                            <!-- Quick Stats -->
+                            <div class="grid grid-cols-3 gap-4 pt-8 border-t border-slate-200/60 max-w-lg mx-auto lg:mx-0">
+                                <div class="text-center lg:text-left">
+                                    <p class="text-2xl sm:text-3xl font-extrabold text-slate-900">₹45Cr+</p>
+                                    <p class="text-xs sm:text-sm text-slate-500">Disbursed Aid</p>
+                                </div>
+                                <div class="text-center lg:text-left">
+                                    <p class="text-2xl sm:text-3xl font-extrabold text-slate-900">120+k</p>
+                                    <p class="text-xs sm:text-sm text-slate-500">Girls Benefitted</p>
+                                </div>
+                                <div class="text-center lg:text-left">
+                                    <p class="text-2xl sm:text-3xl font-extrabold text-slate-900">500+</p>
+                                    <p class="text-xs sm:text-sm text-slate-500">Active Schemes</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-5">
+                            <div class="relative mx-auto max-w-md lg:max-w-none">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-brand-500 to-indigo-600 rounded-3xl transform rotate-3 scale-105 opacity-25"></div>
+                                <div class="relative bg-white p-6 sm:p-8 rounded-3xl shadow-2xl border border-slate-100 space-y-6">
+                                    <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-10 h-10 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center font-bold">
+                                                <i class="fa-solid fa-bolt"></i>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-bold text-slate-800">Smart Match Engine</h4>
+                                                <p class="text-xs text-slate-500">Find in under 60 seconds</p>
+                                            </div>
+                                        </div>
+                                        <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-2.5 py-1 rounded-full">Live 99% Match</span>
+                                    </div>
+                                    <div class="space-y-4">
+                                        <div class="space-y-1">
+                                            <label class="text-xs font-semibold text-slate-600">Select Education Level</label>
+                                            <select id="heroEdu" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm text-slate-700 focus:outline-none focus:border-brand-500">
+                                                <option value="Undergraduate">Undergraduate (B.Tech, BA, BSc, etc.)</option>
+                                                <option value="School">School / Higher Secondary (Class 10-12)</option>
+                                                <option value="Postgraduate">Postgraduate (Masters, MBA, etc.)</option>
+                                                <option value="Ph.D">Ph.D & Research Fellowships</option>
+                                            </select>
+                                        </div>
+                                        <div class="space-y-1">
+                                            <label class="text-xs font-semibold text-slate-600">Field of Study</label>
+                                            <select id="heroField" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm text-slate-700 focus:outline-none focus:border-brand-500">
+                                                <option value="STEM">STEM (Science, Tech, Eng, Math)</option>
+                                                <option value="Medical">Medical & Healthcare</option>
+                                                <option value="Arts">Arts, Humanities & Law</option>
+                                                <option value="Commerce">Commerce, Finance & Management</option>
+                                            </select>
+                                        </div>
+                                        <div class="space-y-1">
+                                            <label class="text-xs font-semibold text-slate-600">Family Annual Income</label>
+                                            <select id="heroIncome" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm text-slate-700 focus:outline-none focus:border-brand-500">
+                                                <option value="low">Under ₹2,50,000 / year</option>
+                                                <option value="mid">₹2,50,000 to ₹6,00,000 / year</option>
+                                                <option value="high">Above ₹6,00,000 / year</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <button onclick="triggerHeroRecommendation()" class="w-full bg-gradient-to-r from-brand-600 to-indigo-600 text-white font-bold py-3 rounded-xl shadow-md hover:opacity-95 transition">
+                                        Check Eligible Scholarships
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Highlights -->
+            <section class="py-20 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Why Choose GirlScholar?</h2>
+                        <p class="text-slate-600 text-lg">We simplify scholarship discovery and eliminate financial hurdles so young women can focus entirely on learning.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 card-hover space-y-4">
+                            <div class="w-14 h-14 rounded-2xl bg-brand-100 text-brand-600 flex items-center justify-center text-2xl font-bold">
+                                <i class="fa-solid fa-bullseye"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900">100% Tailored Matching</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">Our advanced algorithm filters scholarships specifically dedicated to girl students based on merit, income, and state.</p>
+                        </div>
+                        <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 card-hover space-y-4">
+                            <div class="w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center text-2xl font-bold">
+                                <i class="fa-solid fa-shield-check"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900">Verified & Fraud-Free</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">Every scholarship listing is authenticated directly from government portals, CSR initiatives, and trusted trusts.</p>
+                        </div>
+                        <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 card-hover space-y-4">
+                            <div class="w-14 h-14 rounded-2xl bg-pink-100 text-pink-600 flex items-center justify-center text-2xl font-bold">
+                                <i class="fa-solid fa-file-circle-check"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900">Direct Application Support</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">Get step-by-step documentation checklists, deadline reminders, and direct application links in one place.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- VIEW: INTERACTIVE RECOMMENDATION FORM -->
+        <section id="view-recommend" class="hidden py-16 bg-slate-50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center space-y-3 mb-10">
+                    <span class="bg-brand-100 text-brand-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">AI Scholarship Finder</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Tell Us About Yourself</h2>
+                    <p class="text-slate-600">Fill in your details below to instantly view scholarships you are eligible for.</p>
+                </div>
+                <div class="bg-white rounded-3xl shadow-xl border border-slate-100 p-6 sm:p-10">
+                    <form id="recommendationForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="block text-sm font-bold text-slate-700">Full Name</label>
+                                <input type="text" id="inputName" required placeholder="e.g. Ananya Sharma" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-brand-500">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="block text-sm font-bold text-slate-700">State / Region</label>
+                                <select id="inputState" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-brand-500">
+                                    <option value="">Select State</option>
+                                    <option value="All India">All India (Central Schemes)</option>
+                                    <option value="Telangana">Telangana</option>
+                                    <option value="Maharashtra">Maharashtra</option>
+                                    <option value="Karnataka">Karnataka</option>
+                                    <option value="Delhi">Delhi NCR</option>
+                                    <option value="Tamil Nadu">Tamil Nadu</option>
+                                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                    <option value="Kerala">Kerala</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="block text-sm font-bold text-slate-700">Education Level</label>
+                                <select id="inputEdu" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-brand-500">
+                                    <option value="">Select Level</option>
+                                    <option value="School">School / Higher Secondary (Class 10-12)</option>
+                                    <option value="Undergraduate">Undergraduate (B.Tech, BA, BSc, etc.)</option>
+                                    <option value="Postgraduate">Postgraduate (Masters, MBA, etc.)</option>
+                                    <option value="Ph.D">Ph.D & Research</option>
+                                </select>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="block text-sm font-bold text-slate-700">Field of Study</label>
+                                <select id="inputField" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-brand-500">
+                                    <option value="">Select Field</option>
+                                    <option value="STEM">STEM (Science, Tech, Eng, Math)</option>
+                                    <option value="Medical">Medical & Healthcare</option>
+                                    <option value="Arts">Arts, Humanities & Law</option>
+                                    <option value="Commerce">Commerce, Finance & Management</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="block text-sm font-bold text-slate-700">Family Annual Income (₹)</label>
+                                <select id="inputIncome" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-brand-500">
+                                    <option value="">Select Income Bracket</option>
+                                    <option value="150000">Less than ₹2.5 Lakhs</option>
+                                    <option value="500000">₹2.5 Lakhs - ₹6 Lakhs</option>
+                                    <option value="1000000">Above ₹6 Lakhs</option>
+                                </select>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="block text-sm font-bold text-slate-700">Academic Percentage / Marks (%)</label>
+                                <input type="number" id="inputMarks" min="35" max="100" required placeholder="e.g. 88" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-brand-500">
+                            </div>
+                        </div>
+
+                        <div class="pt-4">
+                            <button type="submit" class="w-full bg-gradient-to-r from-brand-600 to-indigo-600 text-white font-bold py-4 rounded-2xl shadow-xl shadow-brand-600/30 hover:opacity-95 transition text-lg flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                <span>Get My Recommended Scholarships</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW: RESULTS DASHBOARD -->
+        <section id="view-dashboard" class="hidden py-16 bg-slate-50 min-h-screen">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Header summary -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-100 shadow-sm mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <div class="flex items-center space-x-2 text-brand-600 font-semibold text-sm mb-1">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>Profile Matched Successfully</span>
+                        </div>
+                        <h2 id="dashboardTitle" class="text-2xl sm:text-3xl font-extrabold text-slate-900">Scholarships For You</h2>
+                        <p id="dashboardSubtitle" class="text-slate-500 text-sm mt-1">Showing verified opportunities matching your academic profile.</p>
+                    </div>
+                    <div class="flex items-center space-x-3 w-full md:w-auto">
+                        <button onclick="switchTab('recommend')" class="w-full md:w-auto px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl text-sm transition">
+                            <i class="fa-solid fa-sliders mr-2"></i> Edit Profile
+                        </button>
+                        <button onclick="switchTab('directory')" class="w-full md:w-auto px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl text-sm transition shadow-md shadow-brand-600/20">
+                            Browse All
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filters & Sorting Bar -->
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
+                    <div class="flex items-center space-x-2 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0">
+                        <button onclick="filterResults('all')" class="dashboard-filter-btn px-4 py-2 rounded-xl text-sm font-bold bg-brand-600 text-white transition whitespace-nowrap">All Matches</button>
+                        <button onclick="filterResults('High Amount')" class="dashboard-filter-btn px-4 py-2 rounded-xl text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition whitespace-nowrap">₹50k+ Grant</button>
+                        <button onclick="filterResults('STEM')" class="dashboard-filter-btn px-4 py-2 rounded-xl text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition whitespace-nowrap">STEM Special</button>
+                    </div>
+                    <div class="flex items-center space-x-2 w-full sm:w-auto justify-end">
+                        <span class="text-sm font-medium text-slate-500 whitespace-nowrap">Sort by:</span>
+                        <select id="sortOption" onchange="sortScholarships()" class="bg-white border border-slate-200 text-slate-700 text-sm rounded-xl px-3 py-2 font-medium focus:outline-none focus:border-brand-500">
+                            <option value="amount-desc">Amount: High to Low</option>
+                            <option value="deadline-asc">Deadline: Soonest</option>
+                            <option value="name-asc">Name: A to Z</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Scholarship Cards Grid -->
+                <div id="scholarshipGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Cards injected via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW: BROWSE ALL SCHOLARSHIPS DIRECTORY -->
+        <section id="view-directory" class="hidden py-16 bg-slate-50 min-h-screen">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto space-y-3 mb-10">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Scholarship Directory</h2>
+                    <p class="text-slate-600">Search and explore our entire database of active scholarships for girl students.</p>
+                </div>
+                <!-- Search & Filter Controls -->
+                <div class="bg-white p-4 sm:p-6 rounded-3xl shadow-sm border border-slate-100 mb-8 space-y-4">
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+                            <i class="fa-solid fa-search"></i>
+                        </span>
+                        <input type="text" id="dirSearchInput" oninput="renderDirectory()" placeholder="Search by scholarship title, provider, or field (e.g. Pragati, AICTE, STEM)..." class="w-full pl-11 pr-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm text-slate-800 focus:outline-none focus:border-brand-500">
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2 pt-2">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mr-2">Category:</span>
+                        <button onclick="setDirCategory('All')" class="dir-cat-btn px-4 py-1.5 rounded-xl text-xs font-bold bg-brand-600 text-white transition">All</button>
+                        <button onclick="setDirCategory('STEM')" class="dir-cat-btn px-4 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">STEM</button>
+                        <button onclick="setDirCategory('Undergraduate')" class="dir-cat-btn px-4 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Undergraduate</button>
+                        <button onclick="setDirCategory('School')" class="dir-cat-btn px-4 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">School</button>
+                        <button onclick="setDirCategory('Medical')" class="dir-cat-btn px-4 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Medical</button>
+                        <button onclick="setDirCategory('Research')" class="dir-cat-btn px-4 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Research</button>
+                    </div>
+                </div>
+
+                <!-- Directory Grid -->
+                <div id="directoryGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Cards injected via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW: SUCCESS STORIES -->
+        <section id="view-stories" class="hidden py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto space-y-3 mb-16">
+                    <span class="bg-indigo-100 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Inspiration</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Success Stories</h2>
+                    <p class="text-slate-600 text-lg">Read how our platform helped brilliant young women achieve their academic dreams without financial stress.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Story 1 -->
+                    <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100 flex flex-col justify-between space-y-6 card-hover">
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-1 text-amber-400">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slate-700 italic text-sm leading-relaxed">
+                                "As the daughter of a single mother, pursuing B.Tech in Computer Science felt impossible due to tuition fees. GirlScholar matched me with the AICTE Pragati Scholarship. Today I am in my final year and placed at an MNC!"
+                            </p>
+                        </div>
+                        <div class="flex items-center space-x-4 pt-4 border-t border-slate-200/60">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Priya R." class="w-12 h-12 rounded-full object-cover">
+                            <div>
+                                <h4 class="font-bold text-slate-900">Priya Ramesh</h4>
+                                <p class="text-xs text-slate-500">B.Tech CSE, Hyderabad</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Story 2 -->
+                    <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100 flex flex-col justify-between space-y-6 card-hover">
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-1 text-amber-400">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slate-700 italic text-sm leading-relaxed">
+                                "The filtering system helped me locate medical entrance coaching scholarships instantly. The deadline alerts ensured I never missed a submission. Highly recommended for every girl student."
+                            </p>
+                        </div>
+                        <div class="flex items-center space-x-4 pt-4 border-t border-slate-200/60">
+                            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80" alt="Sneha K." class="w-12 h-12 rounded-full object-cover">
+                            <div>
+                                <h4 class="font-bold text-slate-900">Sneha Kulkarni</h4>
+                                <p class="text-xs text-slate-500">MBBS First Year, Pune</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Story 3 -->
+                    <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100 flex flex-col justify-between space-y-6 card-hover">
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-1 text-amber-400">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slate-700 italic text-sm leading-relaxed">
+                                "Getting a research fellowship for my postgraduate dissertation was smooth and completely transparent. GirlScholar is a blessing for female scholars across the country."
+                            </p>
+                        </div>
+                        <div class="flex items-center space-x-4 pt-4 border-t border-slate-200/60">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Ananya M." class="w-12 h-12 rounded-full object-cover">
+                            <div>
+                                <h4 class="font-bold text-slate-900">Ananya Mukherjee</h4>
+                                <p class="text-xs text-slate-500">M.Sc Physics, Kolkata</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW: FAQ -->
+        <section id="view-faq" class="hidden py-16 bg-slate-50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center space-y-3 mb-12">
+                    <span class="bg-brand-100 text-brand-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Help Center</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
+                    <p class="text-slate-600">Got questions about eligibility, documents, or application? We've got answers.</p>
+                </div>
+                <div class="space-y-4">
+                    <!-- FAQ Item 1 -->
+                    <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm">
+                        <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center p-6 text-left font-bold text-slate-800 hover:text-brand-600 transition">
+                            <span>Are all scholarships listed on GirlScholar exclusively for girls?</span>
+                            <i class="fa-solid fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-6 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+                            Yes! Our primary mission is female empowerment. Every single scholarship listed either prioritizes female candidates or is exclusively sponsored for girl students.
+                        </div>
+                    </div>
+                    <!-- FAQ Item 2 -->
+                    <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm">
+                        <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center p-6 text-left font-bold text-slate-800 hover:text-brand-600 transition">
+                            <span>Do I need to pay any fee to apply for scholarships through this platform?</span>
+                            <i class="fa-solid fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-6 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+                            No, never. GirlScholar is 100% free for all students. We provide direct links to official government and corporate scholarship portals without any intermediary charges.
+                        </div>
+                    </div>
+                    <!-- FAQ Item 3 -->
+                    <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm">
+                        <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center p-6 text-left font-bold text-slate-800 hover:text-brand-600 transition">
+                            <span>What documents are generally required for scholarship applications?</span>
+                            <i class="fa-solid fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-6 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+                            Standard documents include: Aadhaar Card, Income Certificate issued by competent authority, previous year marksheet/report card, college fee receipt, bank passbook details, and a passport-size photo.
+                        </div>
+                    </div>
+                    <!-- FAQ Item 4 -->
+                    <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm">
+                        <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center p-6 text-left font-bold text-slate-800 hover:text-brand-600 transition">
+                            <span>How does the AI recommendation engine work?</span>
+                            <i class="fa-solid fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-6 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+                            Our engine instantly compares your education level, field of study, state, marks, and family income with the eligibility criteria of hundreds of active scholarships to give you precise matches.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-16 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="space-y-4 md:col-span-1">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-600 flex items-center justify-center text-white shadow-md">
+                            <i class="fa-solid fa-graduation-cap text-lg"></i>
+                        </div>
+                        <span class="text-2xl font-extrabold text-white">GirlScholar</span>
+                    </div>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Empowering female education and bridging financial gaps for ambitious students across the nation.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><button onclick="switchTab('home')" class="hover:text-white transition">Home</button></li>
+                        <li><button onclick="switchTab('recommend')" class="hover:text-white transition">Find Scholarship</button></li>
+                        <li><button onclick="switchTab('directory')" class="hover:text-white transition">Browse All</button></li>
+                        <li><button onclick="switchTab('stories')" class="hover:text-white transition">Success Stories</button></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Scholarship Types</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" onclick="switchTab('directory')" class="hover:text-white transition">STEM Grants for Girls</a></li>
+                        <li><a href="#" onclick="switchTab('directory')" class="hover:text-white transition">Undergraduate Fellowships</a></li>
+                        <li><a href="#" onclick="switchTab('directory')" class="hover:text-white transition">School & Higher Secondary</a></li>
+                        <li><a href="#" onclick="switchTab('directory')" class="hover:text-white transition">Medical & Research Aids</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Stay Updated</h4>
+                    <p class="text-sm text-slate-400 mb-4">Subscribe to receive instant WhatsApp & email alerts on new scholarship deadlines.</p>
+                    <div class="flex space-x-2">
+                        <input type="email" placeholder="Your email address" class="bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-500 w-full">
+                        <button onclick="showToast('Subscribed successfully! We will notify you of new scholarships.')" class="bg-brand-600 hover:bg-brand-700 text-white px-4 py-2.5 rounded-xl font-bold transition">Join</button>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-slate-800 text-center text-sm text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p>&copy; 2026 GirlScholar System. All rights reserved.</p>
+                <div class="flex space-x-6 text-slate-400">
+                    <a href="#" class="hover:text-white transition"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" class="hover:text-white transition"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#" class="hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover:text-white transition"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL: Scholarship Details / Apply -->
+    <div id="detailModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 relative shadow-2xl max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('detailModal')" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div id="modalContent" class="space-y-6">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: Log In -->
+    <div id="loginModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 relative shadow-2xl">
+            <button onclick="closeModal('loginModal')" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="space-y-6">
+                <div class="text-center space-y-2">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-100 text-brand-600 flex items-center justify-center mx-auto text-xl font-bold">
+                        <i class="fa-solid fa-user-lock"></i>
+                    </div>
+                    <h3 class="text-2xl font-extrabold text-slate-900">Welcome Back</h3>
+                    <p class="text-xs text-slate-500">Log in to track your scholarship applications and saved favorites.</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold text-slate-700">Email Address or Mobile</label>
+                        <input type="text" placeholder="name@example.com" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-500">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold text-slate-700">Password</label>
+                        <input type="password" placeholder="••••••••" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-500">
+                    </div>
+                    <button onclick="closeModal('loginModal'); showToast('Successfully logged in!');" class="w-full bg-gradient-to-r from-brand-600 to-indigo-600 text-white font-bold py-3.5 rounded-xl shadow-md hover:opacity-95 transition">
+                        Log In
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-slate-900 text-white px-6 py-3.5 rounded-2xl shadow-2xl flex items-center space-x-3 border border-slate-800">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+        <span id="toastMsg" class="text-sm font-medium">Action completed successfully</span>
+    </div>
+
+    <script>
+        // Comprehensive Scholarship Database
+        const scholarshipsData = [
+            {
+                id: 1,
+                title: "AICTE Pragati Scholarship for Girl Students",
+                provider: "All India Council for Technical Education (AICTE)",
+                amount: "₹50,000 / year",
+                numericAmount: 50000,
+                deadline: "2026-10-31",
+                eduLevel: "Undergraduate",
+                field: "STEM",
+                state: "All India",
+                maxIncome: 800000,
+                minMarks: 60,
+                category: "STEM",
+                description: "To provide assistance to meritorious girl students taking admission in AICTE approved technical institutions at Degree and Diploma level.",
+                eligibility: "Max family income from all sources is not more than ₹8 Lakhs per annum. Admitted in 1st year of Degree/Diploma course.",
+                documents: ["Aadhaar Card", "Income Certificate", "10th & 12th Marksheets", "College Fee Receipt", "Bank Passbook"]
+            },
+            {
+                id: 2,
+                title: "Kishore Vaigyanik Protsahan Yojana (KVPY) Fellowships for Girls",
+                provider: "Department of Science and Technology, Govt of India",
+                amount: "₹7,000 / month + Annual Grant",
+                numericAmount: 84000,
+                deadline: "2026-11-15",
+                eduLevel: "Undergraduate",
+                field: "STEM",
+                state: "All India",
+                maxIncome: 1200000,
+                minMarks: 75,
+                category: "Research",
+                description: "Encouraging students studying Basic Sciences to take up research career in Science, Engineering and Medicine.",
+                eligibility: "Students enrolled in BSc/BS/BStat/BMath or Integrated MSc/MS in Basic Sciences. Special encouragement for girl students.",
+                documents: ["Aadhaar Card", "Academic Transcripts", "Caste Certificate (if applicable)", "Statement of Purpose"]
+            },
+            {
+                id: 3,
+                title: "L'Oréal India For Young Women in Science Scholarship",
+                provider: "L'Oréal India",
+                amount: "₹2,50,000 (One-time)",
+                numericAmount: 250000,
+                deadline: "2026-09-30",
+                eduLevel: "Undergraduate",
+                field: "STEM",
+                state: "All India",
+                maxIncome: 600000,
+                minMarks: 85,
+                category: "STEM",
+                description: "A nationwide scholarship program that encourages and supports young women to pursue their education in scientific fields.",
+                eligibility: "Passed Class 12 in science stream with min 85% in PCB/PCM. Family income less than ₹6 Lakhs.",
+                documents: ["Class 12 Marksheet", "Income Proof", "ID Proof", "Admission Proof"]
+            },
+            {
+                id: 4,
+                title: "Begum Hazrat Mahal National Scholarship",
+                provider: "Maulana Azad Education Foundation, Ministry of Minority Affairs",
+                amount: "₹12,000 / year",
+                numericAmount: 12000,
+                deadline: "2026-10-15",
+                eduLevel: "School",
+                field: "Arts",
+                state: "All India",
+                maxIncome: 200000,
+                minMarks: 50,
+                category: "School",
+                description: "Financial assistance to meritorious girl students belonging to economically weaker sections of minority communities.",
+                eligibility: "Girl students studying in Class 9 to 12 securing at least 50% marks. Annual income below ₹2 Lakhs.",
+                documents: ["School ID Card", "Income Certificate", "Mark Sheet of previous class", "Bank Account in student's name"]
+            },
+            {
+                id: 5,
+                title: "National Overseas Scholarship for Girls",
+                provider: "Ministry of Social Justice and Empowerment",
+                amount: "Full Tuition + Living Stipend (₹15 Lakhs+)",
+                numericAmount: 1500000,
+                deadline: "2026-12-01",
+                eduLevel: "Postgraduate",
+                field: "STEM",
+                state: "All India",
+                maxIncome: 800000,
+                minMarks: 60,
+                category: "Research",
+                description: "Facilitating postgraduate and doctoral studies abroad for meritorious female students.",
+                eligibility: "Under 35 years of age. Minimum 60% marks in qualifying degree. Family income below ₹8 Lakhs.",
+                documents: ["Passport", "Admission Offer Letter from Foreign University", "Degree Certificates", "Income Proof"]
+            },
+            {
+                id: 6,
+                title: "Telangana Mahila Pragati Higher Education Grant",
+                provider: "Government of Telangana",
+                amount: "₹40,000 / year",
+                numericAmount: 40000,
+                deadline: "2026-11-10",
+                eduLevel: "Undergraduate",
+                field: "Commerce",
+                state: "Telangana",
+                maxIncome: 300000,
+                minMarks: 65,
+                category: "Undergraduate",
+                description: "Supporting girl students pursuing professional courses and commerce degrees within Telangana state colleges.",
+                eligibility: "Bonafide resident of Telangana enrolled in UG degree with minimum 65% marks.",
+                documents: ["Telangana Nativity/Residence Certificate", "Aadhaar", "Income Proof", "College ID"]
+            },
+            {
+                id: 7,
+                title: "Maharashtra Savitribai Phule Girl Scholar Fund",
+                provider: "Government of Maharashtra",
+                amount: "₹30,000 / year",
+                numericAmount: 30000,
+                deadline: "2026-10-20",
+                eduLevel: "School",
+                field: "Arts",
+                state: "Maharashtra",
+                maxIncome: 250000,
+                minMarks: 60,
+                category: "School",
+                description: "Promoting higher secondary education among girl students in Maharashtra rural and urban districts.",
+                eligibility: "Studying in Class 11 or 12 in Maharashtra with min 60% marks.",
+                documents: ["Maharashtra Domicile", "Marksheet", "Income Certificate"]
+            },
+            {
+                id: 8,
+                title: "Padma Shri Dr. Anita Gupta Medical Grant for Girls",
+                provider: "Healthcare Trust of India",
+                amount: "₹1,00,000 / year",
+                numericAmount: 100000,
+                deadline: "2026-11-25",
+                eduLevel: "Undergraduate",
+                field: "Medical",
+                state: "All India",
+                maxIncome: 500000,
+                minMarks: 80,
+                category: "Medical",
+                description: "Dedicated scholarship for female MBBS and nursing students displaying extraordinary academic brilliance.",
+                eligibility: "Enrolled in MBBS or BDS or Nursing degree. Family annual income below ₹5 Lakhs.",
+                documents: ["NEET Scorecard / College Admission Proof", "Income Certificate", "Bank Details"]
+            }
+        ];
+
+        let currentActiveTab = 'home';
+        let activeRecommendations = [];
+
+        // Tab Navigation Controller
+        function switchTab(tabId) {
+            const tabs = ['home', 'recommend', 'dashboard', 'directory', 'stories', 'faq'];
+            tabs.forEach(t => {
+                const el = document.getElementById(`view-${t}`);
+                if (el) el.classList.add('hidden');
+                const navEl = document.getElementById(`nav-${t}`);
+                if (navEl) {
+                    navEl.classList.remove('text-brand-600', 'font-semibold');
+                    navEl.classList.add('text-slate-600');
+                }
+            });
+
+            const targetView = document.getElementById(`view-${tabId}`);
+            if (targetView) targetView.classList.remove('hidden');
+
+            const targetNav = document.getElementById(`nav-${tabId}`);
+            if (targetNav) {
+                targetNav.classList.remove('text-slate-600');
+                targetNav.classList.add('text-brand-600', 'font-semibold');
+            }
+
+            currentActiveTab = tabId;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (tabId === 'directory') {
+                renderDirectory();
+            }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Hero Quick Recommendation Trigger
+        function triggerHeroRecommendation() {
+            const edu = document.getElementById('heroEdu').value;
+            const field = document.getElementById('heroField').value;
+            const income = document.getElementById('heroIncome').value;
+
+            // Pre-fill form
+            document.getElementById('inputEdu').value = edu;
+            document.getElementById('inputField').value = field;
+            if(income === 'low') document.getElementById('inputIncome').value = '150000';
+            else if(income === 'mid') document.getElementById('inputIncome').value = '500000';
+            else document.getElementById('inputIncome').value = '1000000';
+            document.getElementById('inputMarks').value = '80';
+            document.getElementById('inputName').value = 'Aspiring Student';
+
+            // Run matching algorithm
+            runMatchingEngine('Aspiring Student', 'All India', edu, field, parseInt(document.getElementById('inputIncome').value), 80);
+        }
+
+        // Interactive Form Submission
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('inputName').value;
+            const state = document.getElementById('inputState').value;
+            const edu = document.getElementById('inputEdu').value;
+            const field = document.getElementById('inputField').value;
+            const income = parseInt(document.getElementById('inputIncome').value);
+            const marks = parseFloat(document.getElementById('inputMarks').value);
+
+            runMatchingEngine(name, state, edu, field, income, marks);
+        }
+
+        // Matching Engine Logic
+        function runMatchingEngine(name, state, edu, field, income, marks) {
+            activeRecommendations = scholarshipsData.filter(s => {
+                const matchEdu = s.eduLevel === edu;
+                const matchField = s.field === field || s.field === 'Arts';
+                const matchIncome = income <= s.maxIncome;
+                const matchMarks = marks >= (s.minMarks - 10); // lenient match for user friendliness
+                return matchEdu && matchIncome && matchMarks;
+            });
+
+            // If strict filter yields too few, fallback to broader matches
+            if (activeRecommendations.length === 0) {
+                activeRecommendations = scholarshipsData.slice(0, 4);
+            }
+
+            document.getElementById('dashboardTitle').innerText = `${name}'s Recommended Scholarships`;
+            document.getElementById('dashboardSubtitle').innerText = `Found ${activeRecommendations.length} verified matching scholarships for your profile.`;
+
+            switchTab('dashboard');
+            renderDashboardCards(activeRecommendations);
+            showToast(`Found ${activeRecommendations.length} matching scholarships for you!`);
+        }
+
+        // Render Dashboard Cards
+        function renderDashboardCards(items) {
+            const grid = document.getElementById('scholarshipGrid');
+            if (items.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12"><p class="text-slate-500">No scholarships found matching current filters.</p></div>`;
+                return;
+            }
+
+            grid.innerHTML = items.map(s => `
+                <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm card-hover flex flex-col justify-between space-y-6">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-start">
+                            <span class="bg-brand-50 text-brand-700 text-xs font-bold px-3 py-1 rounded-full">${s.category}</span>
+                            <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full">98% Match</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900 leading-snug">${s.title}</h3>
+                            <p class="text-xs text-slate-500 mt-1">${s.provider}</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-2xl flex justify-between items-center">
+                            <div>
+                                <span class="text-xs text-slate-400 block font-medium">Award Amount</span>
+                                <span class="text-base font-extrabold text-brand-600">${s.amount}</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xs text-slate-400 block font-medium">Deadline</span>
+                                <span class="text-xs font-bold text-slate-700">${s.deadline}</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-600 line-clamp-2">${s.description}</p>
+                    </div>
+                    <div class="flex items-center space-x-3 pt-2">
+                        <button onclick="openDetailModal(${s.id})" class="flex-1 bg-brand-600 hover:bg-brand-700 text-white font-bold py-2.5 rounded-xl text-sm transition shadow-md shadow-brand-600/20">
+                            Apply Now
+                        </button>
+                        <button onclick="openDetailModal(${s.id})" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl text-sm transition">
+                            Details
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter Dashboard Results
+        function filterResults(type) {
+            let filtered = [...activeRecommendations];
+            if (type === 'High Amount') {
+                filtered = filtered.filter(s => s.numericAmount >= 50000);
+            } else if (type === 'STEM') {
+                filtered = filtered.filter(s => s.field === 'STEM');
+            }
+            renderDashboardCards(filtered);
+        }
+
+        // Sort Scholarships
+        function sortScholarships() {
+            const sortBy = document.getElementById('sortOption').value;
+            let sorted = [...activeRecommendations];
+            if (sortBy === 'amount-desc') {
+                sorted.sort((a,b) => b.numericAmount - a.numericAmount);
+            } else if (sortBy === 'deadline-asc') {
+                sorted.sort((a,b) => new Date(a.deadline) - new Date(b.deadline));
+            } else if (sortBy === 'name-asc') {
+                sorted.sort((a,b) => a.title.localeCompare(b.title));
+            }
+            renderDashboardCards(sorted);
+        }
+
+        // Directory Variables & Functions
+        let currentDirCat = 'All';
+
+        function setDirCategory(cat) {
+            currentDirCat = cat;
+            document.querySelectorAll('.dir-cat-btn').forEach(btn => {
+                if (btn.innerText.includes(cat) || (cat === 'All' && btn.innerText === 'All')) {
+                    btn.classList.remove('bg-slate-100', 'text-slate-600');
+                    btn.classList.add('bg-brand-600', 'text-white');
+                } else {
+                    btn.classList.remove('bg-brand-600', 'text-white');
+                    btn.classList.add('bg-slate-100', 'text-slate-600');
+                }
+            });
+            renderDirectory();
+        }
+
+        function renderDirectory() {
+            const query = document.getElementById('dirSearchInput').value.toLowerCase();
+            let filtered = scholarshipsData.filter(s => {
+                const matchesSearch = s.title.toLowerCase().includes(query) || s.provider.toLowerCase().includes(query) || s.field.toLowerCase().includes(query);
+                const matchesCat = currentDirCat === 'All' || s.category === currentDirCat || s.eduLevel === currentDirCat || s.field === currentDirCat;
+                return matchesSearch && matchesCat;
+            });
+
+            const grid = document.getElementById('directoryGrid');
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12"><p class="text-slate-500">No matching scholarships found in directory.</p></div>`;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(s => `
+                <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm card-hover flex flex-col justify-between space-y-6">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-start">
+                            <span class="bg-indigo-50 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full">${s.category}</span>
+                            <span class="text-xs font-semibold text-slate-500"><i class="fa-solid fa-location-dot mr-1"></i>${s.state}</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900 leading-snug">${s.title}</h3>
+                            <p class="text-xs text-slate-500 mt-1">${s.provider}</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-2xl flex justify-between items-center">
+                            <div>
+                                <span class="text-xs text-slate-400 block font-medium">Award</span>
+                                <span class="text-base font-extrabold text-brand-600">${s.amount}</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xs text-slate-400 block font-medium">Deadline</span>
+                                <span class="text-xs font-bold text-slate-700">${s.deadline}</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-600 line-clamp-2">${s.description}</p>
+                    </div>
+                    <div class="flex items-center space-x-3 pt-2">
+                        <button onclick="openDetailModal(${s.id})" class="flex-1 bg-brand-600 hover:bg-brand-700 text-white font-bold py-2.5 rounded-xl text-sm transition shadow-md shadow-brand-600/20">
+                            Apply / View
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Modal Controls
+        function openDetailModal(id) {
+            const s = scholarshipsData.find(item => item.id === id);
+            if (!s) return;
+
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = `
+                <div class="space-y-6">
+                    <div>
+                        <span class="bg-brand-50 text-brand-700 text-xs font-bold px-3 py-1 rounded-full">${s.category}</span>
+                        <h2 class="text-2xl font-extrabold text-slate-900 mt-2">${s.title}</h2>
+                        <p class="text-sm text-slate-500 mt-1">${s.provider}</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl">
+                        <div>
+                            <span class="text-xs text-slate-400 block font-medium">Award Amount</span>
+                            <span class="text-lg font-extrabold text-brand-600">${s.amount}</span>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-400 block font-medium">Application Deadline</span>
+                            <span class="text-sm font-bold text-slate-700">${s.deadline}</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="font-bold text-slate-800 text-sm">About the Scholarship</h4>
+                        <p class="text-sm text-slate-600 leading-relaxed">${s.description}</p>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="font-bold text-slate-800 text-sm">Eligibility Criteria</h4>
+                        <p class="text-sm text-slate-600 leading-relaxed">${s.eligibility}</p>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="font-bold text-slate-800 text-sm">Required Documents Checklist</h4>
+                        <ul class="list-disc list-inside text-sm text-slate-600 space-y-1">
+                            ${s.documents.map(doc => `<li>${doc}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="pt-4 flex space-x-3">
+                        <button onclick="closeModal('detailModal'); showToast('Redirecting to official portal secure gateway...');" class="flex-1 bg-gradient-to-r from-brand-600 to-indigo-600 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-brand-600/30 hover:opacity-95 transition text-center">
+                            Proceed to Official Portal <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('detailModal').classList.remove('hidden');
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        // FAQ Accordion Toggle
+        function toggleFaq(btn) {
+            const content = btn.nextElementSibling;
+            const icon = btn.querySelector('i');
+            content.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+
+        // Toast Notification Trigger
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            toastMsg.innerText = msg;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
